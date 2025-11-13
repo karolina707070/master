@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if partner %}Редактирование партнера{% else %}Добавление партнера{% endif %}</title>
+    <link rel="icon" href="{% static 'ppl/img/logo.png' %}" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="{% static 'ppl/style.css' %}">
+</head>
+<body>
+
+<header>
+    <img src="{% static 'ppl/img/logo.png' %}" alt="логотип" class="logo">
+    <h1>Мастер пол</h1>
+    <a href="{% url 'spisok' %}" class="spisok_link">Список партнеров</a>
+</header>
+
+<div class="dopfon">
+    <div class="uk-container uk-container-large">
+        <div>
+            <h2 class="nazv-form">{% if partner %}Редактирование партнера{% else %}Добавление партнера{% endif %}</h2>
+
+            <form method="POST" class="form">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="form-field">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+
+                <div class="form-buttons">
+                    <button type="submit" class="submit-btn">
+                        {% if partner %}Сохранить изменения{% else %}Добавить партнера{% endif %}
+                    </button>
+                    <a href="{% url 'spisok' %}" class="cancel-btn">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit-icons.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>История реализации продаж</title>
+  <link rel="icon" href="{% static 'ppl/img/logo.png' %}" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/css/uikit.min.css" />
+  <link rel="stylesheet" href="{% static 'ppl/style.css' %}">
+</head>
+<body>
+
+<header>
+  <img src="{% static 'ppl/img/logo.png' %}" alt="логотип" class="logo">
+  <h1>Мастер пол</h1>
+</header>
+
+<div class="dopfon">
+  <div class="uk-container uk-container-large">
+
+
+      <h2>Истории продаж: {{ partner.organization.name }}</h2>
+
+    <div class="cards">
+
+
+      {% if sales_history %}
+    {% for sale in sales_history %}
+    <div class="sale">
+        <div class="sale_header">
+            <span class="product_name">
+                {{ sale.product.product_name }}
+            </span>
+        </div>
+        <div class="kolvo">
+            Количество: {{ sale.quantity }} ед.
+        </div>
+        <div class="date">
+            Дата продажи: {{ sale.sale_date|date:"d.m.Y" }}
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="nonono">
+        <p>Нет данных о продажах</p>
+    </div>
+{% endif %}
+
+
+      <div class="back">
+        <a href="/" class="action_link"><-- Назад</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit-icons.min.js"></script>
+</html>

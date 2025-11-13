@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Список партнеров</title>
+  <link rel="icon" href="{% static 'ppl/img/logo.png' %}" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/css/uikit.min.css" />
+  <link rel="stylesheet" href="{% static 'ppl/style.css' %}">
+</head>
+<body>
+
+<header>
+  <img src="{% static 'ppl/img/logo.png' %}" alt="логотип" class="logo">
+  <h1>Мастер пол</h1>
+</header>
+
+<div class="dopfon">
+  <div class="uk-container uk-container-large">
+    <div class="cards">
+      {% for data in partner_data %}
+      <div>
+        <div class="card">
+          <div class="zagcard">
+            <span class="typeandname">
+              {{ data.partner.partner_type.name }} | {{ data.partner.organization.name }}
+            </span>
+            <span class="skidka">{{ data.discount }}%</span>
+          </div>
+          <div class="director">
+            {{ data.partner.fio }}
+          </div>
+          <div class="phone">
+            {{ data.partner.phone|default:"Телефон не указан" }}
+          </div>
+          <div class="rating">
+            Рейтинг: {{ data.partner.rating }}
+          </div>
+          <div class="actions">
+    <a href="/history/{{ data.partner.id }}/" class="action_link">История</a>
+    <a href="/forma/{{ data.partner.id }}/" class="action_link">Редактировать</a>
+</div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="nonono">
+        <p>Партнеры не найдены</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.24.2/dist/js/uikit-icons.min.js"></script>
+</html>
